@@ -73,14 +73,15 @@ void BionicWebserver::initWifi()
     // Set HOTSPOT Mode
     WiFi.mode(WIFI_AP);    
    
-   // Setting the IP-Address
+    // Setup the Wifi with SSID, PW, Channel, IsHidden, Allowed Connections
+    WiFi.softAP(wifi_ssid_s.c_str(), WIFI_PASSWORD, 6, 0, 1);
+    delay(250);
+    
+    // Setting the IP-Address
     WiFi.softAPConfig(m_ap_ip, m_ap_ip, IPAddress(255, 255, 255, 0));  
     delay(250);
   
-    // Setup the Wifi with SSID, PW, Channel, IsHidden, Allowed Connections
-    WiFi.softAP(wifi_ssid_s.c_str(), WIFI_PASSWORD, 6, 0, 1);
     IPAddress myIP = WiFi.softAPIP();
-    delay(250);
     
     // Print all results to the serial port
     Serial.println(PRINT_PREFIX + "Wifi ready!");
